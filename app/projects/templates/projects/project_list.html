@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Strategie-Portal-BS{% endblock %}
+
+{% block content %}
+
+
+<div class="container">
+    <h1>Digilab Vorhaben</h1>
+    <br>
+    <a href="{% url 'projects:project_create' %}" class="btn btn-primary rounded-pill">
+        Create New Project <i class="fas fa-plus"></i>
+    </a>
+    <br>
+    <br>
+    <table class="table">
+        <tr>
+            <th><i class="fas fa-edit"></i></th>
+            <th>Titel</th>
+            <th>Beginn</th>
+            <th>Dauer Monate</th>
+            <th>Status</th>
+            <th>Kontakt</th>
+            <th><i class="fas fa-trash-alt"></i></th>
+        </tr>
+        <tr>
+            <th></th>
+            <th><input type="text" id="filter-titel" class="form-control" placeholder="Filter Titel"></th>
+            <th><input type="date" id="filter-beginn" class="form-control"></th>
+            <th><input type="number" id="filter-dauer" class="form-control" placeholder="Filter Dauer"></th>
+            <th><input type="text" id="filter-status" class="form-control" placeholder="Filter Status"></th>
+            <th><input type="text" id="filter-kontakt" class="form-control" placeholder="Filter Kontakt"></th>
+            <th></th>
+        </tr>
+        {% for project in projects %}
+        <tr>
+            <td><a href="{% url 'projects:project_edit' project.pk %}"><i class="fas fa-edit"></i></a></td>
+            <td>{{ project.title }}</td>
+            <td>{{ project.start_year }}</td>
+            <td>{{ project.duration_months }}</td>
+            <td>{{ project.status }}</td>
+            <td>{{ project.contact_person }}</td>
+            <td>
+                <form action="{% url 'projects:project_confirm_delete' project.pk %}" method="GET"
+                    style="display: inline;">
+                    <button type="submit" style="border: none; background: none; padding: 0; cursor: pointer;">
+                        <i class="fas fa-trash-alt" style="color: red;"></i>
+                    </button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+
+</html>
+{% endblock %}

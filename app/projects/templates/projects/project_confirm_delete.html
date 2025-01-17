@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Strategie-Portal-BS{% endblock %}
+
+{% block content %}
+
+    <div class="container">
+        <h1>Willst du das Vorhaben <i>{{ project.title }}</i> wirklich löschen"?</h1>
+        <br>
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-primary rounded-pill">Bestätigung</button>
+        </form>
+    </div>
+
+{% endblock %}
