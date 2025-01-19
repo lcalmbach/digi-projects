@@ -1,0 +1,170 @@
+{% extends "base.html" %}
+{% load static %}
+{% load model_extras %}
+
+{% block title %}Strategie-Portal-BS{% endblock %}
+{% block content %}
+
+<div class="container">
+
+    <h1>Vorhaben: {{ project.title }}</h1>
+    <br>
+    <table class="table">
+        <tr>
+            <th>{{ project|verbose_name:"title" }}</th>
+            <td>{{ project.title }}</td>
+        </tr>
+        <tr>
+            <th>{{ project|verbose_name:"description" }}</th>
+            <td>{{ project.description }}</td>
+        </tr>
+        <tr>
+            <th>{{ project|verbose_name:"description_before" }}</th>
+            <td>{{ project.description_before }}</td>
+        </tr>
+        <tr>
+            <th>{{ project|verbose_name:"description_after" }}</th>
+            <td>{{ project.description_after }}</td>
+        </tr>
+        <tr>
+            <th>{{ project|verbose_name:"start_year" }}</th>
+            <td>{{ project.start_year }}</td>
+        </tr>
+        <tr>
+            <th>{{ project|verbose_name:"end_year" }}</th>
+            <td>{{ project.end_year }}</td>
+        </tr>
+        <tr>
+            <th>{{ project|verbose_name:"cost_plan_kchf" }}</th>
+            <td>{{ project.cost_plan_kchf }}</td>
+        </tr>
+        <tr>
+            <th>{{ project|verbose_name:"cost_effective_kchf" }}</th>
+            <td>{{ project.cost_effective_kchf }}</td>
+        </tr>
+        <tr>
+            <th>{{ project|verbose_name:"effort_plan_pt" }}</th>
+            <td>{{ project.effort_plan_pt }}</td>
+        </tr>
+        <tr>
+            <th>{{ project|verbose_name:"duration_months" }}</th>
+            <td>{{ project.duration_months }}</td>
+        </tr>
+        <tr>
+            <th>{{ project|verbose_name:"progress" }}</th>
+            <td>{{ project.progress }}</td>
+        </tr>
+        <tr>
+            <th>{{ project|verbose_name:"infrastructure" }}</th>
+            <td>
+                {% for i in project.infrastructure|to_range %}
+                    <i class="fas fa-circle"></i>
+                {% endfor %}
+                {% for i in 5|to_range|slice:":{{ 5|add:-project.infrastructure }}" %}
+                    <span class="fa fa-circle-o"></span>
+                {% endfor %}
+            </td>
+        </tr>
+        <tr>
+            <th>{{project|verbose_name:"data" }}</th>
+            <td>
+                {% for i in project.data|to_range %}
+                    <i class="fas fa-circle"></i>
+                {% endfor %}
+                {% for i in 5|to_range|slice:":{{ 4|add:-project.data }}" %}
+                    <span class="fa fa-circle-o"></span>
+                {% endfor %}
+            </td>
+        </tr>
+        <tr>
+            <th>{{project|verbose_name:"culture" }}</th>
+            <td>
+                {% for i in project.data|to_range %}
+                    <i class="fas fa-circle"></i>
+                {% endfor %}
+                {% for i in 5|to_range|slice:":{{ 5|add:-project.culture }}" %}
+                    <span class="fa fa-circle-o"></span>
+                {% endfor %}
+            </td>
+        </tr>
+        <tr>
+            <th>{{project|verbose_name:"process" }}</th>
+            <td>
+                {% for i in project.process|to_range %}
+                    <i class="fas fa-circle"></i>
+                {% endfor %}
+                {% for i in 5|to_range|slice:":{{ 4|add:-project.process }}" %}
+                    <span class="fa fa-circle-o"></span>
+                {% endfor %}
+            </td>
+        </tr>
+        <tr>
+            <th>
+                Ziel-Kundengruppe
+            </th>
+            <td>Mitarbeitende
+                {% if project.employees %}
+                    <i class="fas fa-check-square" aria-hidden="true"></i>
+                {% else %}
+                    <i class="fas fa-square" aria-hidden="true"></i>
+                {% endif %}
+                <br>
+                Bevölkerung
+                {% if project.citizens %}
+                    <i class="fas fa-check-square" aria-hidden="true"></i>
+                {% else %}
+                    <i class="fas fa-square" aria-hidden="true"></i>
+                {% endif %}
+                <br>
+                Wirtschaft
+                {% if project.citizens %}
+                    <i class="fas fa-check-square" aria-hidden="true"></i>
+                {% else %}
+                    <i class="fas fa-square" aria-hidden="true"></i>
+                {% endif %}
+                <br>
+            </td>
+        </tr>
+        <tr>
+            <th>
+                Verwendung im Portal
+            </th>
+            <td>
+                {% if project.verwendung_portal %}
+                    <i class="fas fa-check-square" style="color: grey;" aria-hidden="true"></i>
+                {% else %}
+                    <i class="fas fa-square" style="color: grey;" aria-hidden="true"></i>
+                {% endif %}
+            </td>
+        </tr>
+        <tr>
+            <th>
+                {{ project|verbose_name:"contact_person" }}
+            </th>
+            <td>
+                {{ project.contact_person }}
+            </td>
+        </tr>
+        <tr>
+            <th>
+                Zugewiesene Strategische Ziele
+            </th>
+            <td>
+                <ul>
+                    {% for ziel in project.project_goals.all %}
+                        <li>{{ziel.goal.title }}</li>
+                    {% endfor %}
+                </ul>
+                <br>
+                <a href="{% url 'projects:assign_goal' project.pk %}" class="btn btn-primary rounded-pill">Strategisches Ziel zuweisen</a>
+            </td>
+    </table>
+</div>
+
+
+{% endblock %}
+<style>
+    .checked {
+        color: orange; /* Change this color to your preference */
+    }
+    </style>

@@ -2,7 +2,14 @@ from django import forms
 from .models import Project
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit, Layout, Fieldset, Div
+from .models import ProjectGoal
 
+class ProjectGoalForm(forms.ModelForm):
+    class Meta:
+        model = ProjectGoal
+        fields = ['goal', 'description']
+
+        
 class ProjectForm(forms.ModelForm):
     class Meta:
         model = Project

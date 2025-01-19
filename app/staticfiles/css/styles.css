@@ -109,3 +109,7 @@ td.button-cell {
     background-color: #579a5f; /* Even darker on hover */
     border-color: #579a5f;
 }
+
+.checked {
+    color: #004d40; /* Dark green text color */
+}

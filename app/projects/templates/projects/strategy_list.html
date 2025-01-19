@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Strategie-Portal-BS{% endblock %}
+
+{% block content %}
+
+
+<div class="container">
+    <h1>Digitalstrategie Basel-Stadt <a href="https://digital-basel.ch/" target="_blank">
+        <i class="fa fa-external-link"></i></a></h1>
+
+    <br>
+    <table class="table">
+        <tr>
+            <th>Handlungsfeld</th>
+            <th>Ziele</th>
+        </tr>
+        {% for area in object_list %}
+        <tr>
+            <td colspan="2"><b>{{ area.title }}</b></td>
+        </tr>
+            {% for goal in area.area_goals.all %}
+            <tr>    
+                <td></td><td><i>{{ goal.title }}</i>: {{ goal.description }}</td>
+            </tr>
+            {% endfor %}    
+        {% endfor %}
+    </table>
+</div>
+
+{% endblock %}

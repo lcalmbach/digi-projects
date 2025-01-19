@@ -14,7 +14,9 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
   <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
-  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="{% static 'star_ratings/css/star-ratings.css' %}">
+  <script type="text/javascript" src="{% static 'star_ratings/js/dist/star-ratings.min.js' %}"></script>
 </head>
 
 <body>
@@ -25,7 +27,10 @@
           <a class="nav-link {% if request.resolver_match.url_name == 'home' %}active{% endif %}"
             href="{% url 'projects:project_list' %}">Home</a>
         </li>
-
+        <li class="nav-item">
+          <a class="nav-link {% if request.resolver_match.url_name == 'strategy' %}active{% endif %}"
+            href="{% url 'projects:strategy_list' %}">Digital-Strategie</a>
+        </li>
       </ul>
     </div>
   </nav>
@@ -46,11 +51,11 @@
   <script>
     $(document).ready(function () {
       {% for message in messages %}
-      toastr.options = {
-        "closeButton": true,
-        "progressBar": true,
-      }
-      toastr.success("{{ message|escapejs }}");
+        toastr.options = {
+          "closeButton": true,
+          "progressBar": true,
+        }
+        toastr.success("{{ message|escapejs }}");
       {% endfor %}
     });
   </script>
