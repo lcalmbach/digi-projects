@@ -24,13 +24,15 @@ class Goal(models.Model):
     
 
 class Project(models.Model):
+    RATING_CHOICES = [(i, str(i)) for i in range(6)]  # 0 to 5
+
     title = models.CharField(verbose_name='Titel', max_length=200)
     description = models.TextField(verbose_name='Beschreibung des Vorhabens', max_length=2000, blank=True, null=True)
     contact_person = models.CharField(verbose_name='Kontakt', max_length=100)
     description_before = models.TextField(verbose_name='Vorher', blank=True, null=True, max_length=1000)
     description_after = models.TextField(verbose_name='Nachher', max_length=1000)
-    start_year = models.IntegerField(verbose_name='Von', default=datetime.now().year + 1)
-    end_year = models.IntegerField(verbose_name='Bis', default=datetime.now().year)
+    start_year = models.IntegerField(verbose_name='Von', default=datetime.now().year)
+    end_year = models.IntegerField(verbose_name='Bis', default=datetime.now().year + 1)
     cost_plan_kchf = models.IntegerField(verbose_name='Budget (kCHF)', default=0)
     cost_effective_kchf = models.IntegerField(verbose_name="Ist-Kosten (kCHF)", default=0)
     effort_plan_pt = models.IntegerField(verbose_name="Aufwand Plan (PT)", default=0)
@@ -47,7 +49,7 @@ class Project(models.Model):
     economy = models.BooleanField(verbose_name="Wirtschaft", default=False)
 
     url = models.URLField(verbose_name='URL', blank=True, null=True)
-    verwendung_portal = models.BooleanField(verbose_name="Sichtbar in öff. Portal", default=False)   
+    verwendung_portal = models.BooleanField(verbose_name="Sichtbar in öffentlichem Portal", default=False)   
     internal_comments = models.TextField(verbose_name='Interne Bemerkungen', blank=True, null=True, max_length=1000)
     
     def status(self):
@@ -58,6 +60,31 @@ class Project(models.Model):
         else:
             return 'Geplant'
     
+    def display(self, rating):
+        result = ''
+        for i in range(rating + 1):
+            result += '<i class="fas fa-circle"></i>'
+        for i in range(5 - rating):
+            result += '<span class="fa fa-circle-o"></span>'
+        print(result)
+        return result
+    
+    @property
+    def   infrastructure_display(self):
+        return self.display(self.infrastructure)
+    
+    @property
+    def data_display(self):
+        return self.display(self.data)
+    
+    @property
+    def process_display(self):
+        return self.display(self.process)
+    
+    @property
+    def culture_display(self):
+        return self.display(self.culture)
+
     def __str__(self):
         return self.title
 

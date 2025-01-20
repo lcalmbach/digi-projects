@@ -51,15 +51,16 @@
   <script>
     $(document).ready(function () {
       {% for message in messages %}
-        toastr.options = {
-          "closeButton": true,
-          "progressBar": true,
-        }
-        toastr.success("{{ message|escapejs }}");
+      toastr.options = {
+        "closeButton": true,
+        "progressBar": true,
+      }
+      toastr.success("{{ message|escapejs }}");
       {% endfor %}
     });
   </script>
   {% endif %}
+
 </body>
 
 </html>

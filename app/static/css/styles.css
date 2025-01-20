@@ -110,3 +110,14 @@ td.button-cell {
     background-color: #579a5f; /* Even darker on hover */
     border-color: #579a5f;
 }
+
+.inline-radio ul {
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+    display: flex;
+    gap: 10px;
+}
+.inline-radio ul li {
+    display: inline;
+}

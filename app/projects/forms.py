@@ -1,7 +1,7 @@
 from django import forms
 from .models import Project
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Submit, Layout, Fieldset, Div
+from crispy_forms.layout import Submit, Layout, Fieldset, Div, Fieldset, ButtonHolder, Submit
 from .models import ProjectGoal
 
 class ProjectGoalForm(forms.ModelForm):
@@ -9,11 +9,20 @@ class ProjectGoalForm(forms.ModelForm):
         model = ProjectGoal
         fields = ['goal', 'description']
 
-        
+
 class ProjectForm(forms.ModelForm):
     class Meta:
         model = Project
         fields = '__all__' 
+
+        widgets = {
+            'infrastructure': forms.RadioSelect(choices=Project.RATING_CHOICES, attrs={'class': 'form-check-inline'}),
+            'data': forms.RadioSelect(choices=Project.RATING_CHOICES, attrs={'class': 'form-check-inline'}),
+            'process': forms.RadioSelect(choices=Project.RATING_CHOICES, attrs={'class': 'form-check-inline'}),
+            'culture': forms.RadioSelect(choices=Project.RATING_CHOICES, attrs={'class': 'form-check-inline'}),
+        }
+
+        
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -31,3 +40,4 @@ class ProjectForm(forms.ModelForm):
                 css_class='text-center'
             )
         )
+

@@ -113,3 +113,11 @@ td.button-cell {
 .checked {
     color: #004d40; /* Dark green text color */
 }
+
+.form-check-inline input[type="radio"] {
+    margin-right: 5px;
+}
+.form-check-inline {
+    display: flex;
+    gap: 10px;
+}

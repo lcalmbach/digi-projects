@@ -55,47 +55,29 @@
             <td>{{ project.progress }}</td>
         </tr>
         <tr>
+            
+        <tr>
             <th>{{ project|verbose_name:"infrastructure" }}</th>
             <td>
-                {% for i in project.infrastructure|to_range %}
-                    <i class="fas fa-circle"></i>
-                {% endfor %}
-                {% for i in 5|to_range|slice:":{{ 5|add:-project.infrastructure }}" %}
-                    <span class="fa fa-circle-o"></span>
-                {% endfor %}
+                {{ project.infrastructure_display|safe }}
             </td>
         </tr>
         <tr>
             <th>{{project|verbose_name:"data" }}</th>
             <td>
-                {% for i in project.data|to_range %}
-                    <i class="fas fa-circle"></i>
-                {% endfor %}
-                {% for i in 5|to_range|slice:":{{ 4|add:-project.data }}" %}
-                    <span class="fa fa-circle-o"></span>
-                {% endfor %}
+                {{ project.data_display|safe }}
             </td>
         </tr>
         <tr>
             <th>{{project|verbose_name:"culture" }}</th>
             <td>
-                {% for i in project.data|to_range %}
-                    <i class="fas fa-circle"></i>
-                {% endfor %}
-                {% for i in 5|to_range|slice:":{{ 5|add:-project.culture }}" %}
-                    <span class="fa fa-circle-o"></span>
-                {% endfor %}
+                {{ project.culture_display|safe }}
             </td>
         </tr>
         <tr>
             <th>{{project|verbose_name:"process" }}</th>
             <td>
-                {% for i in project.process|to_range %}
-                    <i class="fas fa-circle"></i>
-                {% endfor %}
-                {% for i in 5|to_range|slice:":{{ 4|add:-project.process }}" %}
-                    <span class="fa fa-circle-o"></span>
-                {% endfor %}
+                {{ project.process_display|safe }}
             </td>
         </tr>
         <tr>
@@ -104,23 +86,23 @@
             </th>
             <td>Mitarbeitende
                 {% if project.employees %}
-                    <i class="fas fa-check-square" aria-hidden="true"></i>
+                    <i class="fas fa-check-square" style="color: grey;" aria-hidden="true"></i>
                 {% else %}
-                    <i class="fas fa-square" aria-hidden="true"></i>
+                    <i class="fas fa-square" style="color: grey;" aria-hidden="true"></i>
                 {% endif %}
                 <br>
                 Bevölkerung
                 {% if project.citizens %}
-                    <i class="fas fa-check-square" aria-hidden="true"></i>
+                    <i class="fas fa-check-square" style="color: grey;" aria-hidden="true"></i>
                 {% else %}
-                    <i class="fas fa-square" aria-hidden="true"></i>
+                    <i class="fas fa-square" style="color: grey;" aria-hidden="true"></i>
                 {% endif %}
                 <br>
                 Wirtschaft
                 {% if project.citizens %}
-                    <i class="fas fa-check-square" aria-hidden="true"></i>
+                    <i class="fas fa-check-square" style="color: grey;" aria-hidden="true"></i>
                 {% else %}
-                    <i class="fas fa-square" aria-hidden="true"></i>
+                    <i class="fas fa-square" style="color: grey;" aria-hidden="true"></i>
                 {% endif %}
                 <br>
             </td>

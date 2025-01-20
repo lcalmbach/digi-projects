@@ -1,21 +1,18 @@
 {% extends "base.html" %}
-{% block content %}
 {% load crispy_forms_tags %}
 {% load static %}
-<body>
-    <div class="container">
-    <h1>Digilab-Vorhaben {{projekt.name}}</h1>
-    
-    <div class="container">
-        <h1>Neues Digilab-Vorhaben</h1>
-        <form method="post">
-            {% csrf_token %}
-            {{ form | crispy }}
-            <button type="submit" class="btn btn-primary rounded-pill">Speichern</button>
-            <a href="{% url 'projects:assign_goal' project.pk %}" class="btn btn-primary rounded-pill">Strategisches Ziel zuweisen</a>
-        </form>
-    </div>
-    <br>
 
+{% block content %}
+
+<div class="container">
+    <h1>Digilab-Vorhaben {{ projekt.name }}</h1>
+    
+    <h1>Neues Digilab-Vorhaben</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form | crispy }}
+        <button type="submit" class="btn btn-primary rounded-pill">Speichern</button>&MediumSpace;
+        <a href="{% url 'projects:assign_goal' project.pk %}" class="btn btn-primary rounded-pill">Strategisches Ziel zuweisen</a>
+    </form>
 </div>
 {% endblock %}
